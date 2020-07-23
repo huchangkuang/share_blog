@@ -1,5 +1,7 @@
 <template>
-    <Layout>index</Layout>
+    <Layout>
+        <div>Index</div>
+    </Layout>
 </template>
 
 <script>

@@ -2,9 +2,9 @@
     <Layout>Create</Layout>
 </template>
 
-<script lang="ts">
+<script >
 
-  import Layout from "../components/Layout.vue";
+  import Layout from "@/components/Layout.vue";
   export default {
     name: "Create",
     components: {Layout}

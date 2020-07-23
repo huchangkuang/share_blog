@@ -2,9 +2,9 @@
     <Layout>User</Layout>
 </template>
 
-<script lang="ts">
+<script>
 
-  import Layout from "../components/Layout.vue";
+  import Layout from "@/components/Layout.vue";
   export default {
     name: "User",
     components: {Layout}

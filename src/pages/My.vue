@@ -2,9 +2,8 @@
     <Layout>My</Layout>
 </template>
 
-<script lang="ts">
-
-  import Layout from "../components/Layout.vue";
+<script>
+  import Layout from "@/components/Layout.vue";
   export default {
     name: "My",
     components: {Layout}

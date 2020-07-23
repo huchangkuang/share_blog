@@ -1,11 +1,13 @@
 <template>
-    <div>index</div>
+    <Layout>index</Layout>
 </template>
 
 <script lang="ts">
 
+  import Layout from "../components/Layout.vue";
   export default {
-    name: "Index"
+    name: "Index",
+    components: {Layout}
   }
 </script>
 

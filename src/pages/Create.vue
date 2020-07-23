@@ -1,11 +1,13 @@
 <template>
-    <div>Create</div>
+    <Layout>Create</Layout>
 </template>
 
 <script lang="ts">
 
+  import Layout from "../components/Layout.vue";
   export default {
-    name: "Create"
+    name: "Create",
+    components: {Layout}
   }
 </script>
 

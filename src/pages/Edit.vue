@@ -1,11 +1,13 @@
 <template>
-    <div>Edit</div>
+    <Layout>Edit</Layout>
 </template>
 
 <script lang="ts">
 
+  import Layout from "../components/Layout.vue";
   export default {
-    name: "Edit"
+    name: "Edit",
+    components: {Layout}
   }
 </script>
 

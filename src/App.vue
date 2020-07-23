@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <HelloWorld/>
+    <Header/>
     <router-view/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    Footer
   }
 }
 </script>
 
-<style>
+<style lang="scss">
   @import "~@/assets/style/reset.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

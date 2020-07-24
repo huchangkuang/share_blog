@@ -16,18 +16,18 @@
 
 <script>
 
-  import Layout from "@/components/Layout.vue";
+    import Layout from "@/components/Layout.vue";
 
-  export default {
-    name: "Detail",
-    components: {Layout},
-    data(){
-      return{
-        createdAt:"",
-        markdown: ""
-      }
-    }
-  };
+    export default {
+        name: "Detail",
+        components: {Layout},
+        data() {
+            return {
+                createdAt: "",
+                markdown: ""
+            }
+        }
+    };
 </script>
 
 <style lang="scss" scoped>

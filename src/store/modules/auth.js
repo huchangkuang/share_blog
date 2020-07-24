@@ -3,7 +3,7 @@ const state = {
   user:null,
   isLogin:false
 }
-const getter = {
+const getters = {
   user: state=>state.user,
   isLogin:state=>state.isLogin
 }
@@ -30,7 +30,7 @@ const actions ={
   async logout({commit}){
     await auth.logout()
     commit("setUser",{user:null})
-    commit("setLogin",{isLogin:true})
+    commit("setLogin",{isLogin:false})
   },
   async checkLogin({commit,state}){
     if (state.isLogin) {return true}
@@ -44,7 +44,7 @@ const actions ={
 
 export default {
   state,
-  getter,
+  getters,
   mutations,
   actions,
 }

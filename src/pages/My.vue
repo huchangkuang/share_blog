@@ -47,6 +47,9 @@
     methods: {
       onPageChange() {
         console.log("当前页面改变")
+      },
+      onDelete(id){
+        console.log(id)
       }
     }
   }

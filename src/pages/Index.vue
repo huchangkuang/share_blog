@@ -31,7 +31,7 @@
     components: {Layout},
     data(){
       return {
-        total: "",
+        total: 0,
         page: 1,
         blogs: []
       }

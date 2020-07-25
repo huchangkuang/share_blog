@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div id="user">
+        <div id="my">
             <section class="user-info">
                 <img :src="user.avatar" :alt="user.username" class="avatar">
                 <h3>{{user.username}}</h3>
@@ -100,7 +100,6 @@
     @import "~@/assets/style/helper.scss";
 
     #my,#user {
-
         .user-info {
             display: grid;
             grid: auto auto / 80px 1fr;
@@ -163,7 +162,6 @@
                 a {
                     color: $themeLighterColor;
                 }
-
             }
         }
 

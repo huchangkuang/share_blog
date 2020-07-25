@@ -64,6 +64,9 @@
             font-size: 40px;
             margin: 60px 0 0 0;
             text-transform: uppercase;
+            @media(max-width:500px) {
+                margin: 20px 0 0 0;
+            }
         }
         p {
             margin: 15px 0 0 0;
@@ -71,6 +74,9 @@
         }
         .buttons {
             margin-top: 20px;
+            @media(max-width:500px) {
+                margin: 0;
+            }
         }
         button {
             margin: 20px 5px 0;

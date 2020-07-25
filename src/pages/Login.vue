@@ -30,7 +30,7 @@
       ...mapActions(["login"]),
       onLogin() {
         this.login({username: this.username, password: this.password}).then(() => {
-          this.$message({message: "登录成功", type: "success"})
+          this.$message({message: "登录成功", type: "success",duration:1000})
           this.$router.push({path:this.$route.query.redirect || "/"})
         })
       }

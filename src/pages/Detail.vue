@@ -2,12 +2,9 @@
     <Layout>
         <div id="detail">
             <section class="user-info">
-                <img alt="" src="" class="avatar">
+                <img :src="user.avatar" :alt="user.username" :title="user.username" class="avatar">
                 <h3>{{title}}</h3>
-                <p>
-                    <router-link :to="`/user`"></router-link>
-                    发布于{{createdAt}}
-                </p>
+                <p><router-link :to="`/user/${user.id}`">{{user.username}}</router-link> 发布于{{createdAt}}</p>
             </section>
             <section class="article" v-html="markdown"></section>
         </div>
@@ -17,15 +14,34 @@
 <script>
 
     import Layout from "@/components/Layout.vue";
+    import blog from "@/api/blog";
+    import marked from "marked"
 
     export default {
         name: "Detail",
         components: {Layout},
         data() {
             return {
-                createdAt: "",
-                markdown: ""
+              title: '',
+              rawContent: '',
+              user: {},
+              createdAt: ''
             }
+        },
+      computed:{
+          markdown(){
+            return marked(this.rawContent)
+          }
+      },
+        created(){
+          this.blogId = this.$route.params.blogId
+          blog.getDetail({blogId:this.blogId}).then(res=>{
+            console.log(res)
+            this.title = res.data.title
+            this.rawContent = res.data.content
+            this.createdAt = res.data.createdAt
+            this.user = res.data.user
+          })
         }
     };
 </script>

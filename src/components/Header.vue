@@ -43,7 +43,10 @@
     methods: {
       ...mapActions(["checkLogin","logout"]),
       onLogout(){
-        this.logout()
+        this.logout().then(()=>{
+          this.$route.path === "/index" ? console.log("注销") :
+          this.$router.push("/index")
+        })
       }
     },
     created(){

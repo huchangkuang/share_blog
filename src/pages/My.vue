@@ -104,7 +104,6 @@
         .user-info {
             display: grid;
             grid: auto auto / 80px 1fr;
-
             margin-top: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid #ebebeb;
@@ -166,7 +165,6 @@
                 }
 
             }
-
         }
 
         .pagination {

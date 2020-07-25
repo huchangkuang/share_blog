@@ -56,6 +56,9 @@
 
         input {
             width: 400px;
+            @media (max-width:500px) {
+                width: 300px;
+            }
         }
 
         .error {

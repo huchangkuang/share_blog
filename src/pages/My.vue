@@ -2,15 +2,15 @@
     <Layout>
         <div id="user">
             <section class="user-info">
-                <img alt="" src="" class="avatar">
-                <h3></h3>
+                <img :src="user.avatar" :alt="user.username" class="avatar">
+                <h3>{{user.username}}</h3>
             </section>
             <section>
                 <router-link class="item" v-for="blog in blogs" :key="blog.id" :to="`/detail/${blog.id}`">
                     <div class="date">
-                        <span class="day"></span>
-                        <span class="month"></span>
-                        <span class="year"></span>
+                        <span class="day">{{splitDate(blog.createdAt).date}}</span>
+                        <span class="month">{{splitDate(blog.createdAt).month}}月</span>
+                        <span class="year">{{splitDate(blog.createdAt).year}}</span>
                     </div>
                     <h3>{{blog.title}}</h3>
                     <p>{{blog.description}}</p>
@@ -34,28 +34,69 @@
 
 <script>
   import Layout from "@/components/Layout.vue";
+  import blog from "@/api/blog";
+  import {mapGetters} from "vuex"
   export default {
     name: "My",
     components: {Layout},
-    data(){
+    data() {
       return {
-        total: "",
+        blogs: [],
         page: 1,
-        blogs: []
+        total: 0
       }
     },
+
+    computed: {
+      ...mapGetters(['user'])
+    },
+
+    created() {
+      this.page = parseInt(this.$route.query.page || "1")
+      blog.getBlogsByUserId(this.user.id, { page: this.page })
+        .then(res => {
+          console.log(res)
+          this.page = res.page
+          this.total = res.total
+          this.blogs = res.data
+        })
+    },
+
     methods: {
-      onPageChange() {
-        console.log("当前页面改变")
+      onPageChange(newPage) {
+        blog.getBlogsByUserId(this.user.id, { page: newPage }).then(res => {
+          console.log(res)
+          this.blogs = res.data
+          this.total = res.total
+          this.page = res.page
+          this.$router.push({ path: "/my", query: { page: newPage } })
+        })
       },
-      onDelete(id){
-        console.log(id)
+
+      async onDelete(blogId) {
+        await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        await blog.deleteBlog({ blogId })
+        this.$message.success('删除成功')
+        this.blogs = this.blogs.filter(blog => blog.id !== blogId)
+      },
+
+      splitDate(dataStr) {
+        let dateObj = typeof dataStr === 'object' ? dataStr : new Date(dataStr)
+        return {
+          date: dateObj.getDate(),
+          month: dateObj.getMonth() + 1,
+          year: dateObj.getFullYear()
+        }
       }
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     @import "~@/assets/style/helper.scss";
 
     #my,#user {
@@ -128,5 +169,8 @@
 
         }
 
+        .pagination {
+            text-align: center;
+        }
     }
 </style>

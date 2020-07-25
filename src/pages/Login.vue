@@ -31,7 +31,7 @@
       onLogin() {
         this.login({username: this.username, password: this.password}).then(() => {
           this.$message({message: "登录成功", type: "success"})
-          this.$router.push("/")
+          this.$router.push({path:this.$route.query.redirect || "/"})
         })
       }
     }

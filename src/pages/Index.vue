@@ -4,11 +4,11 @@
             <section class="blog-posts">
                 <router-link class="item" v-for="(blog,index) in blogs" :key="index" :to="`/detail/${blog.id}`">
                     <figure class="avatar">
-                        <img src="" alt="">
-                        <figcaption></figcaption>
+                        <img :src="blog.user.avatar" :alt="blog.user.username">
+                        <figcaption>{{blog.user.username}}</figcaption>
                     </figure>
-                    <h3><span></span></h3>
-                    <p></p>
+                    <h3>{{blog.title}}<span> {{blog.createdAt}}</span></h3>
+                    <p>{{blog.description}}</p>
                 </router-link>
             </section>
             <section class="pagination">
@@ -26,6 +26,7 @@
 <script>
 
   import Layout from "@/components/Layout.vue";
+  import blog from "@/api/blog";
   export default {
     name: "Index",
     components: {Layout},
@@ -36,9 +37,24 @@
         blogs: []
       }
     },
+    created(){
+      this.page = parseInt(this.$route.query.page || "1")
+      blog.getIndexBlogs({page:this.page}).then(res=>{
+        console.log(res)
+        this.blogs = res.data
+        this.total = res.total
+        this.page = res.page
+      })
+    },
     methods:{
-      onPageChange(){
-        console.log("页数改变")
+      onPageChange(newPage){
+        blog.getIndexBlogs({page:newPage}).then(res=>{
+          console.log(res)
+          this.blogs = res.data
+          this.total = res.total
+          this.page = res.page
+          this.$router.push({path:"/",query:{page:newPage}})
+        })
       }
     }
   }

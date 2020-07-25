@@ -1,14 +1,5 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-// import Index from "@/pages/Index";
-// import User from "@/pages/User";
-// import Create from "@/pages/Create";
-// import Detail from "@/pages/Detail";
-// import Edit from "@/pages/Edit";
-// import My from "@/pages/My";
-// import Register from "@/pages/Register";
-// import Login from "@/pages/Login";
-// import NotFound from "@/pages/NotFound";
 import store from "@/store/index"
 
 Vue.use(VueRouter);
@@ -54,7 +45,7 @@ const router = new VueRouter({
 router.beforeEach((to,from,next)=>{
     if (to.matched.some(record=>record.meta.requireAuth)){
         store.dispatch("checkLogin").then(isLogin=>{
-            if (isLogin){
+            if (!isLogin){
                 next({
                     path: '/login',
                     query: { redirect: to.fullPath }

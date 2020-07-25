@@ -21,7 +21,7 @@
 </template>
 
 <script >
-
+    import blog from "@/api/blog";
   import Layout from "@/components/Layout.vue";
   export default {
     name: "Create",
@@ -36,7 +36,10 @@
       },
     methods: {
       onCreate(){
-        console.log("创建博客")
+        blog.createBlog({title:this.title,content:this.content,description:this.description,atIndex:this.atIndex}).then(res=>{
+          this.$message({message:res.msg,type:"success"})
+          this.$router.push(`/blog/${res.data.id}`)
+        })
       }
     }
   }
